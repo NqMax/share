@@ -1,8 +1,12 @@
 import { validator } from "@hono/hono/validator";
 import { z } from "zod";
+import { ValidationTargets } from "@hono/hono/types";
 
-export function JSONValidator<T extends z.ZodTypeAny>(schema: T) {
-  return validator("json", (value, c) => {
+export function zodValidator<T extends z.ZodTypeAny>(
+  target: keyof ValidationTargets,
+  schema: T
+) {
+  return validator(target, (value, c) => {
     const parsedBody = schema.safeParse(value);
 
     if (!parsedBody.success) {

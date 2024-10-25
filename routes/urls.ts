@@ -1,12 +1,12 @@
 import { Hono } from "@hono/hono";
-import { JSONValidator } from "@/middleware/validators.ts";
+import { zodValidator } from "@/middleware/zodValidators.ts";
 import { urlSchema } from "@/schemas/index.ts";
 // Service
 import { createUrl } from "@/services/url-service.ts";
 
 const app = new Hono();
 
-app.post("/urls", JSONValidator(urlSchema), async (c) => {
+app.post("/urls", zodValidator("json", urlSchema), async (c) => {
   const body = c.req.valid("json");
 
   const result = await createUrl(body);

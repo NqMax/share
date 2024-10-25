@@ -1,5 +1,5 @@
 import { Hono } from "@hono/hono";
-import { JSONValidator } from "@/middleware/validators.ts";
+import { zodValidator } from "@/middleware/zodValidators.ts";
 import { domainSchema } from "@/schemas/index.ts";
 // Service
 import {
@@ -28,7 +28,7 @@ app.get("/domains/:domain_name", async (c) => {
   return c.json(result);
 });
 
-app.post("/domains", JSONValidator(domainSchema), async (c) => {
+app.post("/domains", zodValidator("json", domainSchema), async (c) => {
   const body = c.req.valid("json");
 
   const result = await createDomain(body);
