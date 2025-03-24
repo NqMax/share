@@ -1,4 +1,4 @@
-import { sql } from "@/db.ts";
+import { sql } from "@/db/db.ts";
 import { domainSchema } from "@/schemas/index.ts";
 import type { z } from "zod";
 
