@@ -7,5 +7,3 @@ const envSchema = z.object({
 });
 
 const env = await load({ export: true });
-
-envSchema.parse(env);
